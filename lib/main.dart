@@ -88,6 +88,22 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            // コンテナウィジェット
+            Container(
+              // width: double.infinity,
+              width: 200,
+              height: 50,
+              // colorとdecorationを両方使う場合は、decorationの中のcolorプロパティを利用する
+              decoration: BoxDecoration(
+                color: Theme.of(context).colorScheme.inversePrimary,
+                // 枠線
+                border: Border.all(color: Colors.white, width: 2),
+                // 角丸
+                borderRadius: BorderRadius.circular(8),
+              ),
+              // 表示位置を指定
+              child: const Text('TextAlign.right', textAlign: TextAlign.right),
+            ),
           ],
         ),
       ),
