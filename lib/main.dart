@@ -44,6 +44,22 @@ class _MyHomePageState extends State<MyHomePage> {
   //   });
   // }
 
+  // ■リスト表示用配列
+  final List<Map<String, dynamic>> listItems = [
+    {
+      'text': 'Item 1',
+      'color': Colors.green[600],
+    },
+    {
+      'text': 'Item 2',
+      'color': Colors.green[300],
+    },
+    {
+      'text': 'Item 3',
+      'color': Colors.green[100],
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     // ■ マテリアルデザイン用ウィジェット
@@ -196,81 +212,146 @@ class _MyHomePageState extends State<MyHomePage> {
     // );
 
     // ■ ボタン
+    // return Scaffold(
+    //   body: Column(
+    //     children: <Widget>[
+    //       Container(
+    //         padding: const EdgeInsets.only(top: 32),
+    //         child: const Text('TextButton'),
+    //       ),
+    //       Row(
+    //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //         children: <Widget>[
+    //           const TextButton(
+    //             onPressed: null,
+    //             child: Text('disabled'),
+    //           ),
+    //           TextButton(
+    //             onPressed: () {},
+    //             child: const Text('enabled'),
+    //           ),
+    //           TextButton(
+    //             style: TextButton.styleFrom(
+    //               backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+    //             ),
+    //             onPressed: () {},
+    //             child: const Text('enabled'),
+    //           ),
+    //         ],
+    //       ),
+    //       Container(
+    //         padding: const EdgeInsets.only(top: 32),
+    //         child: const Text('OutlinedButton'),
+    //       ),
+    //       Row(
+    //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //         children: <Widget>[
+    //           const OutlinedButton(
+    //             onPressed: null,
+    //             child: Text('disabled'),
+    //           ),
+    //           OutlinedButton(
+    //             onPressed: () {},
+    //             child: const Text('enabled'),
+    //           ),
+    //           OutlinedButton(
+    //             onPressed: () {},
+    //             style: OutlinedButton.styleFrom(
+    //               backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+    //             ),
+    //             child: const Text('enabled'),
+    //           ),
+    //         ],
+    //       ),
+    //       Container(
+    //         padding: const EdgeInsets.only(top: 32),
+    //         child: const Text('ElevatedButton'),
+    //       ),
+    //       Row(
+    //         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //         children: <Widget>[
+    //           const ElevatedButton(
+    //             onPressed: null,
+    //             child: Text('disabled'),
+    //           ),
+    //           ElevatedButton(
+    //             onPressed: () {},
+    //             child: const Text('enabled'),
+    //           ),
+    //           ElevatedButton(
+    //             onPressed: () {},
+    //             style: ElevatedButton.styleFrom(
+    //               backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+    //               elevation: 16,
+    //             ),
+    //             child: const Text('enabled'),
+    //           ),
+    //         ],
+    //       ),
+    //     ],
+    //   ),
+    // );
+
+    // ■ リスト
     return Scaffold(
       body: Column(
         children: <Widget>[
           Container(
-            padding: const EdgeInsets.only(top: 32),
-            child: const Text('TextButton'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              const TextButton(
-                onPressed: null,
-                child: Text('disabled'),
-              ),
-              TextButton(
-                onPressed: () {},
-                child: const Text('enabled'),
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+            height: 125,
+            padding: const EdgeInsets.all(4),
+            // childrenを指定してリスト表示
+            child: ListView(
+              children: <Widget>[
+                Container(
+                  height: 50,
+                  color: Colors.blue[600],
+                  child: const Text('Item 1'),
                 ),
-                onPressed: () {},
-                child: const Text('enabled'),
-              ),
-            ],
+                Container(
+                  height: 50,
+                  color: Colors.blue[300],
+                  child: const Text('Item 2'),
+                ),
+                Container(
+                  height: 50,
+                  color: Colors.blue[100],
+                  child: const Text('Item 3'),
+                ),
+              ],
+            ),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 32),
-            child: const Text('OutlinedButton'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              const OutlinedButton(
-                onPressed: null,
-                child: Text('disabled'),
-              ),
-              OutlinedButton(
-                onPressed: () {},
-                child: const Text('enabled'),
-              ),
-              OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                ),
-                child: const Text('enabled'),
-              ),
-            ],
+            height: 125,
+            padding: const EdgeInsets.all(4),
+            // 配列を元にリスト表示
+            child: ListView.builder(
+              itemCount: listItems.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  height: 50,
+                  color: listItems[index]['color'],
+                  child: Text(listItems[index]['text']),
+                );
+              },
+            ),
           ),
           Container(
-            padding: const EdgeInsets.only(top: 32),
-            child: const Text('ElevatedButton'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              const ElevatedButton(
-                onPressed: null,
-                child: Text('disabled'),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text('enabled'),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-                  elevation: 16,
-                ),
-                child: const Text('enabled'),
-              ),
-            ],
+            height: 125,
+            padding: const EdgeInsets.all(4),
+            // 各アイテムの間にスペースなどを挟みたい場合
+            child: ListView.separated(
+              itemCount: listItems.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  height: 50,
+                  color: listItems[index]['color'],
+                  child: Text(listItems[index]['text']),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return const Divider();
+              },
+            ),
           ),
         ],
       ),
