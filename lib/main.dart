@@ -46,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // マテリアルデザイン用ウィジェット
+    // ■ マテリアルデザイン用ウィジェット
     // return Scaffold(
     //   appBar: AppBar(
     //     // テーマに合ったカラー
@@ -116,80 +116,161 @@ class _MyHomePageState extends State<MyHomePage> {
     //   ), // 末尾カンマはbuild()の自動フォーマットをいい感じにする
     // );
 
-    // 縦・横
+    // ■ 縦・横
+    // return Scaffold(
+    //   body: Column(
+    //     children: <Widget>[
+    //       Container(
+    //         width: double.infinity,
+    //         height: 60,
+    //         color: Colors.grey[200],
+    //         child: const Column(
+    //           children: <Widget>[
+    //             Text('first line'),
+    //             Text('second line'),
+    //           ],
+    //         ),
+    //       ),
+    //       Container(
+    //         width: double.infinity,
+    //         height: 70,
+    //         color: Colors.lightGreen,
+    //         child: const Column(
+    //           mainAxisAlignment: MainAxisAlignment.center,
+    //           children: <Widget>[
+    //             Text('***'),
+    //             Text('中央寄せ'),
+    //           ],
+    //         ),
+    //       ),
+    //       Container(
+    //         width: double.infinity,
+    //         height: 60,
+    //         color: Colors.grey[200],
+    //         child: const Column(
+    //           mainAxisAlignment: MainAxisAlignment.end,
+    //           children: <Widget>[
+    //             Text('***'),
+    //             Text('下寄せ'),
+    //           ],
+    //         ),
+    //       ),
+    //       Container(
+    //         width: double.infinity,
+    //         height: 60,
+    //         color: Colors.lightGreen,
+    //         child: const Column(
+    //           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    //           children: <Widget>[
+    //             Text('***'),
+    //             Text('均等に配置'),
+    //           ],
+    //         ),
+    //       ),
+    //       Container(
+    //         width: double.infinity,
+    //         height: 60,
+    //         color: Colors.grey[200],
+    //         child: const Column(
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: <Widget>[
+    //             Text('***'),
+    //             Text('左寄せ'),
+    //           ],
+    //         ),
+    //       ),
+    //       Container(
+    //         width: double.infinity,
+    //         height: 60,
+    //         color: Colors.lightGreen,
+    //         child: const Column(
+    //           crossAxisAlignment: CrossAxisAlignment.end,
+    //           children: <Widget>[
+    //             Text('***'),
+    //             Text('右寄せ'),
+    //           ],
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
+
+    // ■ ボタン
     return Scaffold(
       body: Column(
         children: <Widget>[
           Container(
-            width: double.infinity,
-            height: 60,
-            color: Colors.grey[200],
-            child: const Column(
-              children: <Widget>[
-                Text('first line'),
-                Text('second line'),
-              ],
-            ),
+            padding: const EdgeInsets.only(top: 32),
+            child: const Text('TextButton'),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              const TextButton(
+                onPressed: null,
+                child: Text('disabled'),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text('enabled'),
+              ),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                ),
+                onPressed: () {},
+                child: const Text('enabled'),
+              ),
+            ],
           ),
           Container(
-            width: double.infinity,
-            height: 70,
-            color: Colors.lightGreen,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('***'),
-                Text('中央寄せ'),
-              ],
-            ),
+            padding: const EdgeInsets.only(top: 32),
+            child: const Text('OutlinedButton'),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              const OutlinedButton(
+                onPressed: null,
+                child: Text('disabled'),
+              ),
+              OutlinedButton(
+                onPressed: () {},
+                child: const Text('enabled'),
+              ),
+              OutlinedButton(
+                onPressed: () {},
+                style: OutlinedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                ),
+                child: const Text('enabled'),
+              ),
+            ],
           ),
           Container(
-            width: double.infinity,
-            height: 60,
-            color: Colors.grey[200],
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                Text('***'),
-                Text('下寄せ'),
-              ],
-            ),
+            padding: const EdgeInsets.only(top: 32),
+            child: const Text('ElevatedButton'),
           ),
-          Container(
-            width: double.infinity,
-            height: 60,
-            color: Colors.lightGreen,
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Text('***'),
-                Text('均等に配置'),
-              ],
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 60,
-            color: Colors.grey[200],
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('***'),
-                Text('左寄せ'),
-              ],
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 60,
-            color: Colors.lightGreen,
-            child: const Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text('***'),
-                Text('右寄せ'),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              const ElevatedButton(
+                onPressed: null,
+                child: Text('disabled'),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('enabled'),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+                  elevation: 16,
+                ),
+                child: const Text('enabled'),
+              ),
+            ],
           ),
         ],
       ),
