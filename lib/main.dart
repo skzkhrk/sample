@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  // runApp(const MyApp());
+  runApp(const MyApp2());
 }
 
 // 自分で作成したウィジェット
@@ -389,3 +390,60 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+// ====================== MyApp2 ======================
+
+class MyApp2 extends StatelessWidget {
+  const MyApp2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      debugShowCheckedModeBanner: false,
+      home: const Scaffold(
+        body: Center(
+          child: MyWidget(),
+        ),
+      ),
+    );
+  }
+}
+
+class MyWidget extends StatefulWidget {
+  const MyWidget({super.key});
+
+  // 使用するStateを指定
+  @override
+  _MyWidgetState createState() => _MyWidgetState();
+}
+
+class _MyWidgetState extends State<MyWidget> {
+  int count = 0;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget>[
+        Text(count.toString()),
+        ElevatedButton(
+          style: TextButton.styleFrom(
+            backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          ),
+          onPressed: () {
+            // データを更新する時は setState を呼ぶ
+            setState(() {
+              // データを更新
+              count = count + 1;
+            });
+          },
+          child: const Text('カウントアップ'),
+        ),
+      ],
+    );
+  }
+}
+
+// ====================== /MyApp2 ======================
