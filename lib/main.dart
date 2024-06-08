@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        //
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
@@ -294,6 +293,38 @@ class _MyHomePageState extends State<MyHomePage> {
 
     // ■ リスト
     return Scaffold(
+      // ■ appbar
+      appBar: AppBar(
+        // 左側のアイコン
+        leading: const Icon(Icons.arrow_back),
+        // タイトルテキスト
+        title: const Text(
+          'Sample App',
+          style: TextStyle(fontStyle: FontStyle.italic),
+        ),
+        foregroundColor: Colors.white,
+        backgroundColor: Colors.blueGrey,
+        // 右側のアイコン一覧
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.favorite),
+            tooltip: 'favorite',
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_sharp),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.access_alarm),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.more_vert),
+          ),
+        ],
+      ),
       body: Column(
         children: <Widget>[
           Container(
