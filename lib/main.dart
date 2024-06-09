@@ -473,8 +473,16 @@ class MyTodoApp extends StatelessWidget {
 }
 
 // リスト一覧画面用ウィジェット
-class TodoListPage extends StatelessWidget {
+class TodoListPage extends StatefulWidget {
   const TodoListPage({super.key});
+
+  @override
+  _TodoListPageState createState() => _TodoListPageState();
+}
+
+class _TodoListPageState extends State<TodoListPage> {
+  // Todoリストのデータ
+  List<String> todoList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -483,38 +491,32 @@ class TodoListPage extends StatelessWidget {
         title: const Text('リスト一覧'),
         backgroundColor: Colors.blueGrey,
       ),
-      body: ListView(
-        children: const <Widget>[
-          Card(
+      // データを元にListViewを作成
+      body: ListView.builder(
+        itemCount: todoList.length,
+        itemBuilder: (context, index) {
+          return Card(
             child: ListTile(
-              title: Text('ニンジンを買う'),
+              title: Text(todoList[index]),
             ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('タマネギを買う'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('ジャガイモを買う'),
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text('カレールーを買う'),
-            ),
-          ),
-        ],
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
+        onPressed: () async {
           // pushで新規画面に遷移
-          Navigator.of(context).push(
+          final newListText = await Navigator.of(context).push(
             MaterialPageRoute(builder: (context) {
               return const TodoAddPage();
             }),
           );
+          if (newListText != null) {
+            // キャンセルした場合は newListText が null となるので注意
+            setState(() {
+              // リスト追加
+              todoList.add(newListText);
+            });
+          }
         },
         child: const Icon(Icons.add),
       ),
@@ -522,18 +524,82 @@ class TodoListPage extends StatelessWidget {
   }
 }
 
-class TodoAddPage extends StatelessWidget {
+// リスト追加画面用ウィジェット
+class TodoAddPage extends StatefulWidget {
   const TodoAddPage({super.key});
 
   @override
+  _TodoAddPageState createState() => _TodoAddPageState();
+}
+
+class _TodoAddPageState extends State<TodoAddPage> {
+  // 入力されたテキスト用
+  String _text = '';
+
+  // データをもとに表示するウィジェット
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text('リスト追加画面（クリックで戻る）'),
+      appBar: AppBar(
+        // leadingが自動設定になってる？
+        title: const Text('リスト追加'),
+        backgroundColor: Colors.blueGrey,
+      ),
+      body: Container(
+        // ボタンサイドの余白を付ける
+        padding: const EdgeInsets.all(64),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            // 入力されたテキストを表示
+            Text(
+              _text,
+              style: const TextStyle(color: Colors.blue),
+            ),
+            const SizedBox(height: 8),
+            // テキスト入力
+            TextField(
+              onChanged: (String value) {
+                // データが変更したことを知らせる（画面を更新する）
+                setState(() {
+                  // データを変更
+                  _text = value;
+                });
+              },
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              // 横幅いっぱいに広げる
+              width: double.infinity,
+              // リスト追加ボタン
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blueGrey,
+                ),
+                onPressed: () {
+                  // "pop"で前の画面に戻る
+                  // "pop"の引数から前の画面にデータを渡す
+                  Navigator.of(context).pop(_text);
+                },
+                child:
+                    const Text('リスト追加', style: TextStyle(color: Colors.white)),
+              ),
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              // 横幅いっぱいに広げる
+              width: double.infinity,
+              // キャンセルボタン
+              child: TextButton(
+                // ボタンをクリックした時の処理
+                onPressed: () {
+                  // "pop"で前の画面に戻る
+                  Navigator.of(context).pop();
+                },
+                child: const Text('キャンセル'),
+              ),
+            ),
+          ],
         ),
       ),
     );
